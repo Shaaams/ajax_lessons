@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>AJAX</title>
+    </head>
+    <bode>
+            <button onclick="getRepos()">GET REPOS</button>
+            <div id="show">
+            
+            </div>
+            <script>
+                // Function To Do The Request 
+            function getRepos()    
+                
+                {
+                    //Assign The Request Object To Variable 
+                    var xhr = new XMLHttpRequest();
+                    
+                    //On Ready State Change => Function Called When Ready State Change 
+                    xhr.onreadystatechange = function(){
+
+                            /*
+                            Ready state => The Status Of The Request
+                                [0] Request Not Initalized
+                                [1] Server Connection Established
+                                [2] Request Recieved 
+                                [3] Processing Request
+                                [4] Request Is Finished And Response Is Ready
+                            Status => Response Status Code 
+                                [200] OK
+                            */
+                        /*
+                        Request Is Finished && Response Is Ready && Status Code Is [200][ok]
+                        Get Response Text 
+                        */
+                        if(this.readyState === 4 && this.status === 200){
+                            
+                           // console.log(this.responseText);
+                           //Convert ResponseText To Js Object
+                        var myJsonObject = JSON.parse(this.responseText);
+                            myText ='';
+                        for(var i=0; i < myJsonObject.length; i++){
+                            //print all result
+                            //console.log(myJsonObject[i]);
+                            //print all username
+                           // console.log(myJsonObject[i].username);
+                             //print all Age 
+                            //console.log(myJsonObject[i].Age);
+                            //print All username in var myText
+                            myText += myJsonObject[i].username + "</br>";
+                            console.log(myText);
+                        }
+                            //print All username in DOM
+                            document.getElementById("show").innerHTML = myText;
+                        }
+                    }
+                    //XMLHttpRequest.open('Method','URL', Async:boolean, Optional user , Optinal password)
+                    /*
+                    NOTES:
+                    Async [True OR False] Default True [Async] 
+                    if choose Async Value == False So Async == Sync 
+                     */
+                    xhr.open('GET','Object.json', true);
+                    //XMLHttpRequest.send => The Request Is Sent To The Server
+                    xhr.send();
+                }
+
+                
+            </script>
+    </body>
+</html>
