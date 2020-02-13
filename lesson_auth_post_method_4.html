@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>AJAX</title>
+    </head>
+    <bode>
+        <button onclick="getRepos()">POST REQUEST</button>
+            <script>
+                
+                function getRepos()    
+                    {
+                        
+                        var xhr = new XMLHttpRequest();
+                        
+                        xhr.onreadystatechange = function(){
+                            if(this.readyState === 4 && this.status === 200){
+                                
+                                console.log(this.responseText);
+                            }
+                        }
+                        xhr.open('POST','lesson_auth_post_method_4.php', true);
+                        //the method in the same send data from from
+                        xhr.setRequestHeader(
+                            "Content-Type",
+                            "application/x-www-from-urlencoded"
+                        );
+                        xhr.send('name=shamss&lastlogin=today');
+                    
+                    }
+            </script>
+    </body>
+</html>
